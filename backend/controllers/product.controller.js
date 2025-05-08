@@ -31,3 +31,29 @@ export const addProduct = async (req, res) => {
     res.status(500).json({ error: 'Failed to create product' });
   }
 };
+
+
+export const getProduct = async (req, res) => {
+  const { search } = req.query;
+
+  try {
+    const products = await db.product.findMany({
+      where: search
+        ? {
+            name: {
+              contains: search,
+              mode: 'insensitive', 
+            },
+          }
+        : {},
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+
+    res.status(200).json(products);
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    res.status(500).json({ error: 'Failed to fetch products' });
+  }
+};
