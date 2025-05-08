@@ -6,12 +6,14 @@ export default function ViewProducts() {
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(false);
+  
+  const baseUrl = import.meta.env.VITE_BASE_URL;
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`http://localhost:5000/api/v1/products/getProduct?search=${searchTerm}`);
+        const response = await axios.get(`${baseUrl}api/v1/products/getProduct?search=${searchTerm}`);
         setProducts(response.data);
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -47,7 +49,7 @@ export default function ViewProducts() {
               key={index}
               image={product.imageUrl}
               name={product.name}
-              price={`$${parseFloat(product.price).toFixed(2)}`}
+              price={`₹${parseFloat(product.price).toFixed(2)}`}
               description={product.description}
               addedTime={new Date(product.createdAt).toLocaleString()}
             />

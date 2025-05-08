@@ -9,7 +9,7 @@ export default function AddProduct({ onAdd }) {
     description: '',
     imageUrl: '',
   });
-
+  const baseUrl = import.meta.env.VITE_BASE_URL;
   const handleChange = (e) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
   };
@@ -23,7 +23,7 @@ export default function AddProduct({ onAdd }) {
     }
 
     try {
-      const res = await fetch('http://localhost:5000/api/v1/products', {
+      const res = await fetch(`${baseUrl}api/v1/products`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ export default function AddProduct({ onAdd }) {
                   required
                 />
                 <p className="text-xs text-gray-500 mt-1">
-                  Enter the price in your local currency.
+                Enter the price in Indian Rupees (INR).
                 </p>
               </div>
 

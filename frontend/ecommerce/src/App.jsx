@@ -9,10 +9,10 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function App() {
   const [products, setProducts] = useState([]);
-
+  const baseUrl = import.meta.env.VITE_BASE_URL;
   const fetchProducts = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/v1/products');
+      const res = await fetch(`${baseUrl}api/v1/products`);
       const data = await res.json();
       console.log('Fetched products:', data);
       setProducts(data);
