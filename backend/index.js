@@ -6,7 +6,11 @@ import dotenv from "dotenv"
 dotenv.config()
 
 const app = express();
-app.use(cors());
+import cors from 'cors';
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST'],
+}));
 app.use(express.json());
 
 app.use('/api/v1/products', productRoutes);
