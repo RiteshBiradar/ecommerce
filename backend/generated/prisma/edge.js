@@ -142,6 +142,10 @@ const config = {
         "fromEnvVar": null,
         "value": "windows",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "rhel-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
@@ -159,16 +163,17 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://mydatabase_owner:npg_GZg6lKmYnT1I@ep-polished-river-a190kpxp-pooler.ap-southeast-1.aws.neon.tech/mydatabase?sslmode=require"
+        "value": null
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Product {\n  id          Int      @id @default(autoincrement())\n  name        String\n  price       Float\n  description String\n  imageUrl    String?\n  createdAt   DateTime @default(now())\n}\n",
-  "inlineSchemaHash": "a039c3f76aa985a303149718badfb9bba6c3140cf301ac7360c9cdf72e6a1f68",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider      = \"prisma-client-js\"\n  output        = \"../generated/prisma\"\n  binaryTargets = [\"native\", \"rhel-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Product {\n  id          Int      @id @default(autoincrement())\n  name        String\n  price       Float\n  description String\n  imageUrl    String?\n  createdAt   DateTime @default(now())\n}\n",
+  "inlineSchemaHash": "29bd83c038cd520af983b35ec44c57f735953d5efb3c7242f2cc6cdefb14d52c",
   "copyEngine": true
 }
 config.dirname = '/'
